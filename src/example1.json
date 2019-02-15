@@ -1,0 +1,30 @@
+{
+	"prostitues": {
+		"Calvados": {
+			"femmes": 3,
+			"hommes": 4,
+			"trans": 2
+		},
+		"Hérault": {
+			"femmes": 1,
+			"hommes": 6,
+			"trans": 0
+		
+		}
+	},
+
+	"actions": {
+		"permanence": 3,
+		"action_formation": 2
+	},
+
+	"benevoles": {
+		"Hérault": 3,
+		"Loiret": 2
+	},
+
+	"sensibilises": {
+		"Hérault": 3,
+		"Loiret": 5
+	}
+}
