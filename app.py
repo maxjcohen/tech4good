@@ -3,28 +3,31 @@ import base64
 
 from flask import Flask
 from flask import render_template
+from flask import Response
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 
 from src.getdata import get_numbers
 
 app = Flask(__name__)
 
-@app.route('/plot')
-def build_plot():
+@app.route('/images/plot.png')
+def plot_png():
+	# Create figure
+	fig = Figure()
+	axis = fig.add_subplot(1, 1, 1)
+	xs = range(100)
+	ys = np.random.randint(1, 50, size=len(xs))
+	axis.plot(xs, ys)
 
-	img = io.BytesIO()
+	# Convert figure to bytes
+	output = io.BytesIO()
+	FigureCanvas(fig).print_png(output)
 
-	y = [1,2,3,4,5]
-	x = [0,2,1,3,4]
-	plt.plot(x,y)
-	plt.savefig(img, format='png')
-	img.seek(0)
-
-	plot_url = base64.b64encode(img.getvalue()).decode()
-
-	# return '<img src="data:image/png;base64,{}">'.format(plot_url)
-	return render_template('index.html', plot=plot_url)
+	# Returns image
+	return Response(output.getvalue(), mimetype='image/png')
 
 @app.route('/')
 def hello_world():
