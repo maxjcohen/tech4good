@@ -4,6 +4,7 @@ import base64
 from flask import Flask
 from flask import render_template
 from flask import Response
+from flask import jsonify
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -29,6 +30,13 @@ def plot_png():
 	# Returns image
 	return Response(output.getvalue(), mimetype='image/png')
 
+@app.route('/data/json')
+def get_json():
+	# Get data
+	data = get_numbers()
+
+	return jsonify(data)
+	
 @app.route('/')
 def hello_world():
 	# Get data
