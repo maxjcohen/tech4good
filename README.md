@@ -2,7 +2,7 @@
 Notre solution consiste en un reporting automatique des informations renseignées par les bénévoles dans les gsheets. 
 Notre pipeline s'articule comme suit: 
 * Prétraitement des données:
-  - conversion automatique des données du gsheet en données .csv et paramétrée par un scheduler (fréquence hbdomadaire)
+  - conversion automatique des données du gsheet en données .csv et paramétrée par un scheduler (fréquence hebdomadaire)
   - filtering et conversion des données .csv en .json pour les analyses ultérieures
 * Analyses statistiques des interventions et affichage sur notre interface web:
   - à l'échelle nationale
