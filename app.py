@@ -6,7 +6,7 @@ from flask import request
 import numpy as np
 import time
 
-from src.csv2json import filter_data, filter_data_action
+from src.csv2json import filter_data
 from src.gsheet2csv import load_gspread
 from src.crunch_numbers import text_data, pie_data, map_data, numbers_data
 
@@ -42,7 +42,7 @@ def get_json():
 def hello_world(n_days=0):
     # Load params
     params = {
-        'n_days': int(request.args.get('n_days', 0)),
+        'n_days': int(request.args.get('n_days', 0))
     }
 
     # Get data

@@ -12,14 +12,21 @@ def numbers_data(json):
 
     n_sensibilises = int(np.sum([[e for e in region.values()] for region in json['actions']['prevention'].values()]))
 
+    feed = {}
 
     gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
-
     gauge.add('Prostitues', [{'value': n_prostitues, 'max_value': n_prostitues + int(n_prostitues==0)}])
-    gauge.add('Benevoles', [{'value': n_benevoles, 'max_value': n_benevoles + int(n_benevoles==0)}])
-    gauge.add('Sensibilises', [{'value': n_sensibilises, 'max_value': n_sensibilises + int(n_sensibilises==0)}])
+    feed['chart_prostitues'] = gauge.render(is_unicode=True)
 
-    return {'numbers_chart': gauge.render(is_unicode=True)}
+    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
+    gauge.add('Benevoles', [{'value': n_benevoles, 'max_value': n_benevoles + int(n_benevoles==0)}])
+    feed['chart_benevoles'] = gauge.render(is_unicode=True)
+
+    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
+    gauge.add('Sensibilises', [{'value': n_sensibilises, 'max_value': n_sensibilises + int(n_sensibilises==0)}])
+    feed['chart_sensibilises'] = gauge.render(is_unicode=True)
+
+    return feed
 
 def text_data(json):
 
