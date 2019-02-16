@@ -10,15 +10,15 @@ def text_data(json):
 
     n_prostitues = int(np.sum([[e for e in region.values()] for region in json['actions']['visites'].values()]))
 
-    # n_benevoles = np.sum([region for region in json["visites"].values()])
+    n_benevoles = json["benevoles"]
 
-    # n_sensibilises = np.sum([region for region in json["visites"].values()])
+    n_sensibilises = int(np.sum([[e for e in region.values()] for region in json['actions']['prevention'].values()]))
 
     # Return template filled with data
     feed = {
         "n_prostitues": n_prostitues,
-        # "n_benevoles": n_benevoles,
-        # "n_sensibilises": n_sensibilises
+        "n_benevoles": n_benevoles,
+        "n_sensibilises": n_sensibilises
     }
 
     return feed
@@ -30,7 +30,7 @@ def pie_data(json):
 
     for action, regions in json['actions'].items():
         sum_region = np.sum([region['total'] for region in regions.values()])
-        pie_chart.add(action, sum_region)
+        pie_chart.add(action.title(), sum_region)
     
     feed = {
         "chart": pie_chart.render(is_unicode=True)
