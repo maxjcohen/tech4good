@@ -26,20 +26,22 @@
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Prostituées rencontrées</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Personnes Bénévole</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Personnes sensibilisé</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#actions">Les actions menées</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#map">Répartition des actions en France</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#numbers">Chiffres utiles</a></li>
                 </ul>
         </div>
         </div>
 	</nav>
     <div class="content">
         <h1>Mouvement du Nid en quelques chiffres</h1>
-    	<h2>Répartition des actions des bénévoles</h2>
+    	<h2 id="actions">Les actions menées</h2>
 		{{ pie_chart |safe }}
-    	<h2>Répartition des actions en France</h2>
+
+    	<h2 id="map">Répartition des actions en France</h2>
 	    {{ map_chart |safe }}
-	    <h2>Répartition des actions en France</h2>
+
+	    <h2 id="numbers">Mouvement du Nid, c'est aussi</h2>
 	    <div class="chart_numbers">
         {{ chart_prostitues |safe }}
         {{ chart_benevoles |safe }}
