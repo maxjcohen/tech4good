@@ -5,8 +5,8 @@ body {
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-image: linear-gradient(to left bottom, #f46565, #e16881, #c67093, #a97899, #8f7c93, #918797, #94919a, #9b9b9b, #b3b3b3, #cccccc, #e5e5e5, #ffffff);
+    background-size: cover;
+    background-image: url("https://www.brive.unilim.fr/wp-content/uploads/sites/6/2017/11/FlorianeLeRoux_AmicaleDuNid_Anniversaire_.jpg");
 }
 #app-navbar{
     position: fixed;
@@ -14,7 +14,7 @@ body {
 }
 
 div.contain {
-    width: 400px;
+    width: 600px;
     right: 50%;
     position: absolute;
     transform: translate(50%, 0%);
@@ -23,6 +23,8 @@ div.contain {
     box-shadow: 10px 5px 5px black;
     box-shadow: 0px 0px 60px -30px black;
     margin-top: 60px;
+    border-radius: 10px;
+    height: 800px;
 }
 
 .col-sm-6 {
@@ -31,5 +33,22 @@ div.contain {
 }
 
 div.content {
-    margin-top: 100px;
+    margin-top: 85px;
+    overflow-y: scroll;
+    height: 475px;
+    height: 600px;
+    width: 105%;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 100vh;
+    width: 30vw;
+}
+.footer-dark {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
 }

@@ -28,7 +28,15 @@
         </div>
     </nav>
     <div class="content">
-    <p class="text-center" style="font-size: 32px;margin: 20px;">Nombre de bénévole sur Paris</p><img src="assets/img/47d5158a-8514-40d3-b27a-0acf78f6bcbe.png" style="margin: 0px 0px 50px -125px;height: 305px;">
+    <p class="text-center" style="font-size: 32px;margin: 20px;">Nombre de bénévole sur Paris</p>
+    <div class="chart-container">
+            <canvas id="myChart"></canvas>
+    </div>
+    <div class="chart-container2">
+            <canvas id="myChart2"></canvas>
+    </div>
+</div>
+
     <div class="footer-dark" style="background-color: rgb(23,58,94);">
         <footer>
             <div class="container">
@@ -43,9 +51,10 @@
         </footer>
     </div>
 </div>
-</div>
-
     <script src="assets/js/jquery.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="assets/js/main.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
