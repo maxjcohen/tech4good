@@ -45,6 +45,6 @@ def hello_world():
     data = get_numbers()
 
     # Crunch numbers
-    feed = text_data(data)
+    feed_text = text_data(data)
 
-    return render_template('index.html', **feed)
+    return render_template('index.html', **feed_text)
