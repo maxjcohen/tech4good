@@ -26,14 +26,13 @@ def text_data(json):
 
 def pie_data(json):
     pie_chart = pygal.Pie(style=custom_style)
-    pie_chart.title = 'Types d\'actions'
 
     for action, regions in json['actions'].items():
         sum_region = np.sum([region['total'] for region in regions.values()])
         pie_chart.add(action.title(), sum_region)
     
     feed = {
-        "chart": pie_chart.render(is_unicode=True)
+        "pie_chart": pie_chart.render(is_unicode=True)
     }
 
     return feed
@@ -83,7 +82,6 @@ def map_data(json):
     ind_color=get_indice_colors(nb_pros_permanence+nb_pros_rencontree,code_dep)
     
     fr_chart = pygal.maps.fr.Departments(style=custom_style, show_legend=False)
-    fr_chart.title = 'Mouvement du Nid en France'
     fr_chart.add("",ind_color)
 
     feed={

@@ -14,15 +14,9 @@ body {
 }
 
 div.contain {
-    width: 400px;
-    right: 50%;
-    position: absolute;
-    transform: translate(50%, 0%);
+    width: 100%;
     background-color: white;
     overflow: hidden;
-    box-shadow: 10px 5px 5px black;
-    box-shadow: 0px 0px 60px -30px black;
-    margin-top: 60px;
 }
 
 .col-sm-6 {
@@ -31,5 +25,8 @@ div.contain {
 }
 
 div.content {
+    width: 50%;
+    margin: 0 auto;
     margin-top: 100px;
+
 }

@@ -20,7 +20,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     # Get data
-    main()
+    # main()
     data = filter_data()
 
     # Crunch numbers
