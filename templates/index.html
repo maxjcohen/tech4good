@@ -34,12 +34,18 @@
         </div>
 	</nav>
     <div class="content">
+        <h1>Mouvement du Nid en quelques chiffres</h1>
     	<h2>Répartition des actions des bénévoles</h2>
 		{{ pie_chart |safe }}
     	<h2>Répartition des actions en France</h2>
 	    {{ map_chart |safe }}
 	    <h2>Répartition des actions en France</h2>
-	    {{ numbers_chart |safe }}
+	    <div class="chart_numbers">
+        {{ chart_prostitues |safe }}
+        {{ chart_benevoles |safe }}
+        {{ chart_sensibilises |safe }}
+        </div>
+
 	</div>
 
 	    <div class="footer-dark" style="background-color: rgb(23,58,94);">

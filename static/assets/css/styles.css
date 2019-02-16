@@ -25,8 +25,14 @@ div.contain {
 }
 
 div.content {
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
     margin-top: 100px;
 
+}
+
+.chart_numbers {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row;
 }
