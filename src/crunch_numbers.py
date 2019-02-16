@@ -5,6 +5,21 @@ import pandas as pd
 
 custom_style = RedBlueStyle(background='transparent')
 
+def numbers_data(json):
+    n_prostitues = int(np.sum([[e for e in region.values()] for region in json['actions']['visites'].values()]))
+
+    n_benevoles = json["benevoles"]
+
+    n_sensibilises = int(np.sum([[e for e in region.values()] for region in json['actions']['prevention'].values()]))
+
+
+    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
+
+    gauge.add('Prostitues', [{'value': n_prostitues, 'max_value': n_prostitues}])
+    gauge.add('Benevoles', [{'value': n_benevoles, 'max_value': n_benevoles}])
+    gauge.add('Sensibilises', [{'value': n_sensibilises, 'max_value': n_sensibilises}])
+
+    return {'numbers_chart': gauge.render(is_unicode=True)}
 
 def text_data(json):
 
