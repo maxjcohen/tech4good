@@ -2,7 +2,7 @@ import json
 import pandas as pd
 
 def filter_data():
-    df = pd.read_csv('data.csv', sep='\t')
+    df = pd.read_csv('src/data.csv', sep='\t')
     df_filled = df.fillna(0, inplace=True)
     df_local = df.groupby(['Votre délégation départementale']).sum()
     data = {'actions': {'visites': {}, 'permanences': {}, 'formation': {}, 'prevention': {}, 'participants': {}}}
@@ -14,13 +14,4 @@ def filter_data():
         data['actions']['prevention'][index] = {'total': row[10]}
     data['benevoles'] = df['test'].nunique() 
     return data
-
-
-def stats():    
-    dic = filter_data()
-    with open('data.json', 'w') as outfile:
-        json.dump(dic, outfile, sort_keys=True, indent=4)
-
-if __name__ == '__main__':
-    stats()
 

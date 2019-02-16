@@ -4,22 +4,24 @@ from flask import Response
 from flask import jsonify
 import numpy as np
 
-from src.getdata import get_numbers
+from src.csv2json import filter_data
+from src.gsheet2csv import main
 from src.crunch_numbers import text_data, pie_data, map_data
 
 app = Flask(__name__)
 
-@app.route('/data/json')
-def get_json():
-    # Get data
-    data = get_numbers()
+# @app.route('/data/json')
+# def get_json():
+#     # Get data
+#     data = filter_data()
 
-    return jsonify(data)
+#     return jsonify(data)
 
 @app.route('/')
 def hello_world():
     # Get data
-    data = get_numbers()
+    main()
+    data = filter_data()
 
     # Crunch numbers
     feed_text = text_data(data)
