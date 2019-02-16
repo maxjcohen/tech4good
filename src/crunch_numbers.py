@@ -15,9 +15,9 @@ def numbers_data(json):
 
     gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
 
-    gauge.add('Prostitues', [{'value': n_prostitues, 'max_value': n_prostitues}])
-    gauge.add('Benevoles', [{'value': n_benevoles, 'max_value': n_benevoles}])
-    gauge.add('Sensibilises', [{'value': n_sensibilises, 'max_value': n_sensibilises}])
+    gauge.add('Prostitues', [{'value': n_prostitues, 'max_value': n_prostitues + int(n_prostitues==0)}])
+    gauge.add('Benevoles', [{'value': n_benevoles, 'max_value': n_benevoles + int(n_benevoles==0)}])
+    gauge.add('Sensibilises', [{'value': n_sensibilises, 'max_value': n_sensibilises + int(n_sensibilises==0)}])
 
     return {'numbers_chart': gauge.render(is_unicode=True)}
 
