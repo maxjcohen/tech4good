@@ -1,15 +1,40 @@
 import numpy as np
 import pygal
+from pygal.style import RedBlueStyle
 import pandas as pd
+
+custom_style = RedBlueStyle(background='transparent')
+
+def numbers_data(json):
+    n_prostitues = int(np.sum([[e for e in region.values()] for region in json['actions']['visites'].values()]))
+
+    n_benevoles = json["benevoles"]
+
+    n_sensibilises = int(np.sum([[e for e in region.values()] for region in json['actions']['prevention'].values()]))
+
+    feed = {}
+
+    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
+    gauge.add('Prostitues', [{'value': n_prostitues, 'max_value': n_prostitues + int(n_prostitues==0)}])
+    feed['chart_prostitues'] = gauge.render(is_unicode=True)
+
+    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
+    gauge.add('Benevoles', [{'value': n_benevoles, 'max_value': n_benevoles + int(n_benevoles==0)}])
+    feed['chart_benevoles'] = gauge.render(is_unicode=True)
+
+    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
+    gauge.add('Sensibilises', [{'value': n_sensibilises, 'max_value': n_sensibilises + int(n_sensibilises==0)}])
+    feed['chart_sensibilises'] = gauge.render(is_unicode=True)
+
+    return feed
 
 def text_data(json):
 
-    n_prostitues = np.sum([[prostitue for prostitue in json["prostitues"][region].values()] \
-        for region in json["prostitues"]])
+    n_prostitues = int(np.sum([[e for e in region.values()] for region in json['actions']['visites'].values()]))
 
-    n_benevoles = np.sum([region for region in json["benevoles"].values()])
+    n_benevoles = json["benevoles"]
 
-    n_sensibilises = np.sum([region for region in json["sensibilises"].values()])
+    n_sensibilises = int(np.sum([[e for e in region.values()] for region in json['actions']['prevention'].values()]))
 
     # Return template filled with data
     feed = {
@@ -22,15 +47,14 @@ def text_data(json):
 
 
 def pie_data(json):
-    pie_chart = pygal.Pie()
-    pie_chart.title = 'Types d\'actions'
+    pie_chart = pygal.Pie(style=custom_style)
 
-    for action, n_action in json['actions'].items():
-        pie_chart.add(action, n_action)
+    for action, regions in json['actions'].items():
+        sum_region = np.sum([region['total'] for region in regions.values()])
+        pie_chart.add(action.title(), sum_region)
     
-    render = pie_chart.render(is_unicode=True)
     feed = {
-        "chart": render
+        "pie_chart": pie_chart.render(is_unicode=True)
     }
 
     return feed
@@ -38,13 +62,13 @@ def pie_data(json):
 def get_dic_prostitute(json_data,VISITE_PERMANENCE="prostitues"):
 
     dic_prostitues={}
-    for departements in json_data[VISITE_PERMANENCE].keys():
-        dic_prostitues[departements]=sum(json_data[VISITE_PERMANENCE][departements].values())
+    for departements in json_data['actions'][VISITE_PERMANENCE].keys():
+        dic_prostitues[departements]=sum(json_data['actions'][VISITE_PERMANENCE][departements].values())
 
     return(pd.DataFrame.from_dict(dic_prostitues,orient='index'))
 
-def get_indice_colors(nb_pros_rencontree,nb_pros_permanence,code_dep):
-    nb_pros_visite_df=pd.DataFrame(nb_pros_rencontree+nb_pros_permanence)
+def get_indice_colors(nbr,code_dep):
+    nb_pros_visite_df=pd.DataFrame(nbr)
     department_of_interest=list(nb_pros_visite_df.index) 
 
     nb_pros_visites=np.array(nb_pros_visite_df)
@@ -62,30 +86,28 @@ def get_indice_colors(nb_pros_rencontree,nb_pros_permanence,code_dep):
     code_departement=[code_dep[name_dep] for name_dep in department_of_interest]
     ind_color={}
     for i in range(len(nb_pros_visites)):
-        ind_color[code_departement[i]]=nb_pros_visites[i] 
+        ind_color[code_departement[i]]=nb_pros_visites[i][0] 
     return(ind_color)
-
-def get_france_map(ind_color,FILE_NAME_FRANCE_MAP):
-
-    fr_chart = pygal.maps.fr.Departments()
-    fr_chart.title = 'Présence de Mouvement Du Nids en France'
-    fr_chart.add("",ind_color) 
-    return fr_chart.render()
-    
+  
 
 
 def map_data(json):
-    
     FILE_NAME_INDIC_DEPARTMENT="src/indicateur_departement.csv"
     
     indic_dep=pd.read_csv(FILE_NAME_INDIC_DEPARTMENT,sep="\t")
     code_dep = dict(zip(indic_dep.Department,indic_dep.code))
     
     
-    nb_pros_permanence=get_dic_prostitute(json,VISITE_PERMANENCE="prostitues")
-    nb_pros_rencontree=get_dic_prostitute(json,VISITE_PERMANENCE="prostitues")
+    nb_pros_permanence=get_dic_prostitute(json,VISITE_PERMANENCE="permanences")
+    nb_pros_rencontree=get_dic_prostitute(json,VISITE_PERMANENCE="visites")
     
-    ind_color=get_indice_colors(nb_pros_rencontree,nb_pros_permanence,code_dep)
-    render=get_france_map(ind_color,FILE_NAME_FRANCE_MAP)
-    feed={"map_chart":render}
+    ind_color=get_indice_colors(nb_pros_permanence+nb_pros_rencontree,code_dep)
+    
+    fr_chart = pygal.maps.fr.Departments(style=custom_style, show_legend=False)
+    fr_chart.add("",ind_color)
+
+    feed={
+        "map_chart": fr_chart.render(is_unicode=True)
+    }
+
     return feed

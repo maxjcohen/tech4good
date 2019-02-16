@@ -1,0 +1,38 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: linear-gradient(to left bottom, #f46565, #e16881, #c67093, #a97899, #8f7c93, #918797, #94919a, #9b9b9b, #b3b3b3, #cccccc, #e5e5e5, #ffffff);
+}
+#app-navbar{
+    position: fixed;
+    width: 100%;
+}
+
+div.contain {
+    width: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+
+.col-sm-6 {
+    flex: none !important;
+    max-width: none;
+}
+
+div.content {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 100px;
+
+}
+
+.chart_numbers {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row;
+}

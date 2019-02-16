@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+	<body>
+		<h1>Nombre de prostitués dans le calvados</h1>
+<!---	<p>{{ n_prostitues }}</p>
+		<p>{{ n_prostitues }} prostitues rencontrees</p>
+		<p>{{ n_benevoles }} benevoles investits</p>
+		<p>{{ n_sensibilises }} personnes sensibilisees</p>
+        <img src="/images/plot.png" alt="plot">
+-->
+<div class="chart-container" style="position: relative; height:30vh; width:30vw">
+    <canvas id="myChart"></canvas>
+</div>
+<div class="chart-container" style="position: relative; height:30vh; width:30vw">
+    <canvas id="myChart2"></canvas>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>   
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

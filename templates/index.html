@@ -1,14 +1,99 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Home Page</title>
-	</head>
-	<body>
-		<h1>Title</h1>
-		<p>{{ n_prostitues }} prostitues rencontrees</p>
-		<p>{{ n_benevoles }} benevoles investits</p>
-		<p>{{ n_sensibilises }} personnes sensibilisees</p>
-		<div style="width: 50%;margin: 0 auto;">{{ chart|safe }}</div>
-	</body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>hackathon</title>
+
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='assets/bootstrap/css/bootstrap.min.css') }}">
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstr
+      	ap/3.4.0/css/bootstrap.min.css"> -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/fonts/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/Footer-Dark.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/gradient-navbar-1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/gradient-navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
+</head>
+
+<body>
+    <div class="contain">
+    <nav class="navbar navbar-dark navbar-expand-md" id="app-navbar">
+        <div class="container-fluid">
+        	<a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='assets/img/DrfsBHXWkAAcOsg.jpg') }}" style="height: 60px;"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#actions">Les actions menées</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#map">Répartition des actions en France</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#numbers">Chiffres utiles</a></li>
+                </ul>
+        </div>
+        </div>
+	</nav>
+    <div class="content">
+        <h1>Mouvement du Nid en quelques chiffres</h1>
+    	<h2 id="actions">Les actions menées</h2>
+		{{ pie_chart |safe }}
+
+    	<h2 id="map">Répartition des actions en France</h2>
+	    {{ map_chart |safe }}
+
+	    <h2 id="numbers">Mouvement du Nid, c'est aussi</h2>
+	    <div class="chart_numbers">
+        {{ chart_prostitues |safe }}
+        {{ chart_benevoles |safe }}
+        {{ chart_sensibilises |safe }}
+        </div>
+
+        <div class="sortby">
+            <select id="sort_time">
+              <option onclick="sort_dd()" value="0">Toujours</option>
+              <option onclick="sort_dd()" value="365">L'année dernière</option>
+              <option onclick="sort_dd()" value="30">Le mois dernier</option>
+              <option onclick="sort_dd()" value="7">La semaine dernière</option>
+            </select>
+            <select id="sort_region">
+              <option onclick="sort_dd()" value="0">Partout</option>
+              <option onclick="sort_dd()" value="365">Paris</option>
+              <option onclick="sort_dd()" value="30">Campagne</option>
+            </select>
+        </div>
+        
+    <script>
+        function sort_dd() {
+            time_dd =  document.getElementById("sort_time");
+            region_dd =  document.getElementById("sort_region");
+            window.location = "?n_days=" + time_dd.value + "&region=" + region_dd.value;
+        }
+    </script>
+
+	</div>
+
+	    <div class="footer-dark" style="background-color: rgb(23,58,94);">
+	        <footer>
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-sm-6 col-md-3 item">
+	                        <h3>intra - site - events</h3>
+	                        <ul></ul>
+	                    </div>
+	                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a></div>
+	                </div>
+	            </div>
+	        </footer>
+	    </div>
+	</div>
+	
+
+    <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
+
+
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+</body>
 
 </html>
