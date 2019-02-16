@@ -14,7 +14,7 @@ def numbers_data(json):
 
     feed = {}
 
-    radar_chart = pygal.Radar(style=custom_style, filled=True, show_legend=False)
+    radar_chart = pygal.Radar(style=custom_style, fill=True, show_legend=False, human_readable=True)
     radar_chart.x_labels = ['Prostitues recontres', 'Benevoles', 'Sensibilises']
     radar_chart.add('', [n_prostitues, n_benevoles, n_sensibilises])
     
