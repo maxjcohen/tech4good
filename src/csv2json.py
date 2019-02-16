@@ -4,29 +4,34 @@ import datetime
 import numpy as np
 import pandas as pd
 
+def filter_df_days(df, n_days=0):
+    if n_days==0:
+        return df
+
+    format_date = '%m/%d/%Y'
+    date_list = list(map(lambda x: datetime.datetime.strptime(x, format_date), df.iloc[:, 4]))
+
+    time_days = datetime.timedelta(days=n_days)
+    threshold = datetime.datetime.now() - time_days
+    filtered_df = df.iloc[np.where(np.array(date_list)>threshold)]
+
+    return filtered_df
+
 def filter_data(n_days=0, action=None):
     df = pd.read_csv('src/data.csv', sep='\t')
 
-    if n_days==0:
-        json_data = filter_from_df(df)
-    else:
-        format_date = '%m/%d/%Y'
-        date_list = list(map(lambda x: datetime.datetime.strptime(x, format_date), df.iloc[:, 4]))
+    # Filter df by number of days
+    df = filter_df_days(df, n_days)
 
-        time_days = datetime.timedelta(days=n_days)
-        threshold = datetime.datetime.now() - time_days
-        filtered_df = df.iloc[np.where(np.array(date_list)>threshold)]
+    json_data = filter_from_df(df)
 
-        json_data = filter_from_df(filtered_df)
-    
-
+    # Filter output by action
     if action:
         return json_data['actions'][action]
 
     return json_data
 
 def filter_from_df(df):
-    df_filled = df.fillna(0, inplace=True)
     df_local = df.groupby(['Votre délégation départementale']).sum()
     data = {'actions': {'visites': {}, 'permanences': {}, 'formation': {}, 'prevention': {}, 'participants': {}}}
     for index, row in df_local.iterrows():
