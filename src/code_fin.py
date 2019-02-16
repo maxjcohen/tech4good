@@ -1,4 +1,4 @@
-mport datetime
+import datetime
 
 import smtplib,glob,os
 from email.mime.image import MIMEImage
@@ -198,6 +198,3 @@ def send_mail(person="Prénom26"):
     var_exp_acc=get_info_visite_acc(person,data,domaine="Accompagnement")
     heure_travail,moyenne_heure=get_plot(person,data,filename1,filename2)   
     send_mail_benevole(filename,filename2,var_exp,var_exp_acc,person_name="Florian Bastin",mail="bastinflorian1@gmail.com")
-    
-    
-send_mail(person)
