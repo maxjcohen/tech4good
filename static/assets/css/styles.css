@@ -36,3 +36,15 @@ div.content {
   display: flex;
   flex-flow: row;
 }
+
+#catch_phrase {
+  text-align: center;
+  font-style: italic;
+  font-size: 2em;
+  margin: 0;
+}
+
+.sortby {
+  text-align: center;
+  margin: 10%;
+}

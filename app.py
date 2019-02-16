@@ -4,6 +4,7 @@ from flask import Response
 from flask import jsonify
 from flask import request
 import numpy as np
+import pandas as pd
 import time
 
 from src.csv2json import filter_data
@@ -55,4 +56,8 @@ def hello_world(n_days=0):
     feed_map = map_data(data)
     feed_numbers = numbers_data(data)
 
-    return render_template('index.html', **feed_text, **feed_pie, **feed_map, **feed_numbers)
+    df = pd.read_csv('src/indicateur_departement.csv', sep='\t')
+    list_dep = list(df.iloc[:, 1])
+
+
+    return render_template('index.html', list_dep=list_dep, **feed_text, **feed_pie, **feed_map, **feed_numbers)

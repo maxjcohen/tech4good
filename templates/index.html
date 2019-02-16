@@ -42,24 +42,26 @@
 	    {{ map_chart |safe }}
 
 	    <h2 id="numbers">Mouvement du Nid, c'est aussi</h2>
-	    <div class="chart_numbers">
-        {{ chart_prostitues |safe }}
-        {{ chart_benevoles |safe }}
-        {{ chart_sensibilises |safe }}
-        </div>
+
+        {{ numbers_chart | safe }}
+
+        <p id="catch_phrase">{{ n_prostitues }} prostitués rencontrés, {{ n_benevoles }} investis et {{ n_sensibilises }} personnes sensibilisées.</p>
+
 
         <div class="sortby">
             <select id="sort_time">
-              <option onclick="sort_dd()" value="0">Toujours</option>
-              <option onclick="sort_dd()" value="365">L'année dernière</option>
-              <option onclick="sort_dd()" value="30">Le mois dernier</option>
-              <option onclick="sort_dd()" value="7">La semaine dernière</option>
+              <option value="0">Toujours</option>
+              <option value="365">L'année dernière</option>
+              <option value="30">Le mois dernier</option>
+              <option value="7">La semaine dernière</option>
             </select>
             <select id="sort_region">
-              <option onclick="sort_dd()" value="0">Partout</option>
-              <option onclick="sort_dd()" value="365">Paris</option>
-              <option onclick="sort_dd()" value="30">Campagne</option>
+              <option value="0">Partout</option>
+              {% for dep in list_dep %}
+                <option value="{{ dep }}">{{ dep }}</option>
+              {% endfor %}
             </select>
+            <button type="button" class="btn btn-info" onclick="sort_dd()">Sort !</button>
         </div>
         
     <script>

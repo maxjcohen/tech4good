@@ -14,17 +14,11 @@ def numbers_data(json):
 
     feed = {}
 
-    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
-    gauge.add('Prostitues', [{'value': n_prostitues, 'max_value': n_prostitues + int(n_prostitues==0)}])
-    feed['chart_prostitues'] = gauge.render(is_unicode=True)
-
-    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
-    gauge.add('Benevoles', [{'value': n_benevoles, 'max_value': n_benevoles + int(n_benevoles==0)}])
-    feed['chart_benevoles'] = gauge.render(is_unicode=True)
-
-    gauge = pygal.SolidGauge(inner_radius=0.5, style=custom_style, show_legend=False, spacing=5)
-    gauge.add('Sensibilises', [{'value': n_sensibilises, 'max_value': n_sensibilises + int(n_sensibilises==0)}])
-    feed['chart_sensibilises'] = gauge.render(is_unicode=True)
+    radar_chart = pygal.Radar(style=custom_style, filled=True, show_legend=False)
+    radar_chart.x_labels = ['Prostitues recontres', 'Benevoles', 'Sensibilises']
+    radar_chart.add('', [n_prostitues, n_benevoles, n_sensibilises])
+    
+    feed['numbers_chart'] = radar_chart.render(is_unicode=True)
 
     return feed
 
