@@ -4,11 +4,16 @@
 		<title>Home Page</title>
 	</head>
 	<body>
-		<h1>Title</h1>
-		<p>{{ n_prostitues }} prostitues rencontrees</p>
-		<p>{{ n_benevoles }} benevoles investits</p>
-		<p>{{ n_sensibilises }} personnes sensibilisees</p>
-		<div style="width: 50%;margin: 0 auto;">{{ chart|safe }}</div>
+	<div style="width: 50%;margin: 0 auto;">
+		<div>
+			<h1>Title</h1>
+			<p>{{ n_prostitues }} prostitues rencontrees</p>
+			<p>{{ n_benevoles }} benevoles investits</p>
+			<p>{{ n_sensibilises }} personnes sensibilisees</p>
+		</div>
+		<div>{{ map_chart|safe }}</div>
+		<div>{{ chart|safe }}</div>
+	</div>
 	</body>
 
 </html>

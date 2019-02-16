@@ -5,7 +5,7 @@ from flask import jsonify
 import numpy as np
 
 from src.getdata import get_numbers
-from src.crunch_numbers import text_data, pie_data
+from src.crunch_numbers import text_data, pie_data, map_data
 
 app = Flask(__name__)
 
@@ -24,5 +24,6 @@ def hello_world():
     # Crunch numbers
     feed_text = text_data(data)
     feed_pie = pie_data(data)
+    feed_map = map_data(data)
 
-    return render_template('index.html', **feed_text, **feed_pie)
+    return render_template('index.html', **feed_text, **feed_pie, **feed_map)

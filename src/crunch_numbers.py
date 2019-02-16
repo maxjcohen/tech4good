@@ -28,9 +28,8 @@ def pie_data(json):
     for action, n_action in json['actions'].items():
         pie_chart.add(action, n_action)
     
-    render = pie_chart.render(is_unicode=True)
     feed = {
-        "chart": render
+        "chart": pie_chart.render(is_unicode=True)
     }
 
     return feed
@@ -62,20 +61,12 @@ def get_indice_colors(nb_pros_rencontree,nb_pros_permanence,code_dep):
     code_departement=[code_dep[name_dep] for name_dep in department_of_interest]
     ind_color={}
     for i in range(len(nb_pros_visites)):
-        ind_color[code_departement[i]]=nb_pros_visites[i] 
+        ind_color[code_departement[i]]=nb_pros_visites[i][0] 
     return(ind_color)
-
-def get_france_map(ind_color,FILE_NAME_FRANCE_MAP):
-
-    fr_chart = pygal.maps.fr.Departments()
-    fr_chart.title = 'Présence de Mouvement Du Nids en France'
-    fr_chart.add("",ind_color) 
-    return fr_chart.render()
-    
+  
 
 
 def map_data(json):
-    
     FILE_NAME_INDIC_DEPARTMENT="src/indicateur_departement.csv"
     
     indic_dep=pd.read_csv(FILE_NAME_INDIC_DEPARTMENT,sep="\t")
@@ -86,6 +77,13 @@ def map_data(json):
     nb_pros_rencontree=get_dic_prostitute(json,VISITE_PERMANENCE="prostitues")
     
     ind_color=get_indice_colors(nb_pros_rencontree,nb_pros_permanence,code_dep)
-    render=get_france_map(ind_color,FILE_NAME_FRANCE_MAP)
-    feed={"map_chart":render}
+    
+    fr_chart = pygal.maps.fr.Departments()
+    fr_chart.title = 'Mouvement Du Nid en France'
+    fr_chart.add("",ind_color)
+
+    feed={
+        "map_chart": fr_chart.render(is_unicode=True)
+    }
+
     return feed
