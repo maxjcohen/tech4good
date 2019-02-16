@@ -1,6 +1,7 @@
+import csv
+
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import csv
 
 
 def get_sheet():
@@ -17,9 +18,5 @@ def save_csv(sheet):
         writer = csv.writer(f, delimiter='\t')
         writer.writerows(sheet.get_all_values())
 
-def main():
-    sheet = get_sheet()
-    save_csv(sheet)
-
-if __name__ == '__main__':
-    main()
+def load_gspread():
+    save_csv(get_sheet())
