@@ -1,3 +1,25 @@
+$.getJSON("./data/data.json", function(data) {
+    var sum = 0;
+    var totals = [];
+    var names = [];
+    var index;
+
+    for ( index = 0; index < Object.keys(data.actions).length; index++) {
+        names.push(Object.keys(data.actions)[index]);
+    }
+
+    for (var y = 0; y < names.length; y++) {
+        for ( i = 0; i < Object.keys(data.actions)[y].length; i++) {
+            var val = Object.values(data.actions)[y];
+        }
+        for (var b = 0; b < Object.values(val).length; b++) {
+            var test = Object.values(val)[b];
+            sum +=Object.values(test)[0];
+        }
+        totals.push(sum);
+        sum = 0;
+    }
+
 var lineChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [{
@@ -66,52 +88,41 @@ window.onload = function() {
         }
     });
 };
-/*
-document.getElementById('randomizeData').addEventListener('click', function() {
-    lineChartData.datasets.forEach(function(dataset) {
-        dataset.data = dataset.data.map(function() {
-            return randomScalingFactor();
-        });
-    });
-
-    window.myLine.update();
-});*/
 
 var ctx = document.getElementById("myChart2");
 var test = document.getElementsByTagName('p')[0].innerHTML;
-        var myChart = new Chart(ctx, {
-            type: 'polarArea',
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [test, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
+    var myChart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            labels: [names[0], names[1], names[2], names[3], names[4]],
+            datasets: [{
+                label: '# of Votes',
+                data: [totals[0], totals[1], totals[2], totals[3], totals[4]],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
                 }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
             }
+        }
+    });
 });

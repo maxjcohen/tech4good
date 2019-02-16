@@ -43,12 +43,57 @@ div.content {
 .chart-container {
     position: relative;
     margin: auto;
-    height: 100vh;
-    width: 30vw;
+    width: 28vw;
 }
 .footer-dark {
     position: fixed;
     bottom: 0;
     width: 100%;
     padding: 20px;
+}
+
+/* map */
+#info {
+    margin-top: 50px;
+}
+
+#deptinfo {
+    margin-top: 30px;
+}
+
+.department {
+    cursor: pointer;
+    stroke: black;
+    stroke-width: .5px;
+}
+
+.department:hover {
+    stroke-width: 2px;
+}
+
+div.tooltip {
+    position: absolute;
+    opacity:0.8;
+    z-index:1000;
+    text-align:left;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    padding:8px;
+    color:#fff;
+    background-color:#000;
+    font: 12px sans-serif;
+    max-width: 300px;
+    height: 60px;
+}
+
+#svg {
+    display: block;
+    margin: auto;
+}
+
+#map {
+    width: 97%;
+    position: relative;
+    overflow: hidden;
 }
