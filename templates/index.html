@@ -48,6 +48,28 @@
         {{ chart_sensibilises |safe }}
         </div>
 
+        <div class="sortby">
+            <select id="sort_time">
+              <option onclick="sort_dd()" value="0">Toujours</option>
+              <option onclick="sort_dd()" value="365">L'année dernière</option>
+              <option onclick="sort_dd()" value="30">Le mois dernier</option>
+              <option onclick="sort_dd()" value="7">La semaine dernière</option>
+            </select>
+            <select id="sort_region">
+              <option onclick="sort_dd()" value="0">Partout</option>
+              <option onclick="sort_dd()" value="365">Paris</option>
+              <option onclick="sort_dd()" value="30">Campagne</option>
+            </select>
+        </div>
+        
+    <script>
+        function sort_dd() {
+            time_dd =  document.getElementById("sort_time");
+            region_dd =  document.getElementById("sort_region");
+            window.location = "?n_days=" + time_dd.value + "&region=" + region_dd.value;
+        }
+    </script>
+
 	</div>
 
 	    <div class="footer-dark" style="background-color: rgb(23,58,94);">

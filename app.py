@@ -42,7 +42,8 @@ def get_json():
 def hello_world(n_days=0):
     # Load params
     params = {
-        'n_days': int(request.args.get('n_days', 0))
+        'n_days': int(request.args.get('n_days', 0)),
+        'region': request.args.get('region', None)
     }
 
     # Get data

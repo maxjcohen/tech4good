@@ -17,11 +17,23 @@ def filter_df_days(df, n_days=0):
 
     return filtered_df
 
-def filter_data(n_days=0, action=None):
+def filter_df_dep(df, departement=None):
+    if departement==None:
+        return df
+
+    df = df.fillna(0)
+    if departement in list(df['Votre délégation départementale']):
+        df = df.loc[df['Votre délégation départementale'] == departement]
+    
+    return df
+
+
+def filter_data(n_days=0, action=None, region=None):
     df = pd.read_csv('src/data.csv', sep='\t')
 
     # Filter df by number of days
     df = filter_df_days(df, n_days)
+    df = filter_df_dep(df, region)
 
     json_data = filter_from_df(df)
 
