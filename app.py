@@ -11,8 +11,10 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 from src.getdata import get_numbers
+from src.crunch_numbers import text_data
 
 app = Flask(__name__)
+
 
 @app.route('/images/plot.png')
 def plot_png():
@@ -43,18 +45,6 @@ def hello_world():
     data = get_numbers()
 
     # Crunch numbers
-    n_prostitues = np.sum([[prostitue for prostitue in data["prostitues"][region].values()] \
-        for region in data["prostitues"]])
-
-    n_benevoles = np.sum([region for region in data["benevoles"].values()])
-
-    n_sensibilises = np.sum([region for region in data["sensibilises"].values()])
-
-    # Return template filled with data
-    feed = {
-        "n_prostitues": n_prostitues,
-        "n_benevoles": n_benevoles,
-        "n_sensibilises": n_sensibilises
-    }
+    feed = text_data(data)
 
     return render_template('index.html', **feed)
