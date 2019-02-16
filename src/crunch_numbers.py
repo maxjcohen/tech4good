@@ -1,6 +1,10 @@
 import numpy as np
 import pygal
+from pygal.style import RedBlueStyle
 import pandas as pd
+
+custom_style = RedBlueStyle(background='transparent')
+
 
 def text_data(json):
 
@@ -22,7 +26,7 @@ def text_data(json):
 
 
 def pie_data(json):
-    pie_chart = pygal.Pie()
+    pie_chart = pygal.Pie(fill=False, interpolate='cubic', style=custom_style)
     pie_chart.title = 'Types d\'actions'
 
     for action, n_action in json['actions'].items():
@@ -78,8 +82,8 @@ def map_data(json):
     
     ind_color=get_indice_colors(nb_pros_rencontree,nb_pros_permanence,code_dep)
     
-    fr_chart = pygal.maps.fr.Departments()
-    fr_chart.title = 'Mouvement Du Nid en France'
+    fr_chart = pygal.maps.fr.Departments(style=custom_style)
+    fr_chart.title = 'Mouvement du Nid en France'
     fr_chart.add("",ind_color)
 
     feed={
