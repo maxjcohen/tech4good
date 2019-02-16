@@ -1,2 +1,6 @@
 # Compiled python files
 *.pyc
+
+# Jsons
+*.json
+
